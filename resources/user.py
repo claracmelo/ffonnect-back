@@ -12,7 +12,6 @@ user = Blueprint('users', 'user')
 @user.route('/register', methods=["POST"])
 def register():
   payload = request.get_json()
-
   payload['email'] = payload['email'].lower()
   try:
     models.User.get(models.User.email == payload['email'])
