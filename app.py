@@ -33,8 +33,8 @@ def load_user(userid):
     except:
         return None
 
-CORS(members, origins=['http://localhost:3000','https://ffonnect.herokuapp.com/'], supports_credentials=True)
-CORS(user, origins=['http://localhost:3000','https://ffonnect.herokuapp.com/'], supports_credentials=True)
+CORS(members, origins=['https://ffonnect.herokuapp.com/','http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['https://ffonnect.herokuapp.com/','http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(members, url_prefix='/api/v1/members')
 app.register_blueprint(user, url_prefix='/api/v1/user')
@@ -42,7 +42,7 @@ app.register_blueprint(user, url_prefix='/api/v1/user')
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
-
+    print()
     """Connect to the db before each request"""
     print("you should see this before each request") # optional -- to illustrate that this code runs before each request -- similar to custom middleware in express.  you could also set it up for specific blueprints only.
     models.DATABASE.connect()
