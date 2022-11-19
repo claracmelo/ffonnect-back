@@ -29,8 +29,8 @@ class Member(Model):
     relation = CharField() #mom, dad, sis, etc
     dob = DateField() #date of birth
     status = BooleanField() #alive? if not, dod field -- default FALSE
-    dod = DateField(Null=True) #date of death - default NULL
-    direct_relation = CharField(Null=True) #string
+    dod = DateField(null=True) #date of death - default NULL
+    direct_relation = CharField(null=True) #string
     # change this:
     # owner = ForeignKeyField(User, backref='dogs') # string for now, later this can be a relation
     # for this:
