@@ -4,9 +4,12 @@ from flask import Blueprint, request, jsonify
 from playhouse.shortcuts import model_to_dict
 from flask_login import current_user,login_required
 
+
 members = Blueprint('members', 'members')
+
 @members.route('/', methods=['GET'])
 @login_required
+
 def members_index():
     result = models.Member.select()
     print('result of member select query')
@@ -32,7 +35,7 @@ def create_members():
     payload = request.get_json() # this is like req.body in express
     print(current_user,"current user")
     print(payload)
-    new_member = models.Member.create(name=payload['name'],relation=payload["relation"],dob=payload["dob"],status=payload["status"],dod=payload["dod"], relation_id=current_user.id)
+    new_member = models.Member.create(name=payload['name'],relation=payload["relation"],dob=payload["dob"],status=payload["status"],dod=payload["dod"], relation_id=current_user.id,direct_relation =payload)
     print(new_member) # just print the ID -- check sqlite3 to see
 
     # name = CharField() #string
@@ -89,7 +92,9 @@ def delete_member(id):
     query = models.Member.delete().where(models.Member.id == id)
     query.execute()
     return jsonify(
-        data= model_to_dict(models.Member.get_by_id(id)),
+        # I can't show an id of an user that doesn't exists
+        # data= model_to_dict(models.Member.get_by_id(id)),
         message='resource successfully deleted',
         status=200
     ), 200
+

@@ -16,6 +16,13 @@ PORT=os.environ.get("PORT")
 
 app = Flask(__name__) 
 app.secret_key = os.environ.get("APP_SECRET")
+
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='None',
+)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -26,11 +33,12 @@ def load_user(userid):
     except:
         return None
 
-CORS(members, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(members, origins=['http://localhost:3000','https://ffonnect-back.herokuapp.com'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000','https://ffonnect-back.herokuapp.com'], supports_credentials=True)
 
 app.register_blueprint(members, url_prefix='/api/v1/members')
 app.register_blueprint(user, url_prefix='/api/v1/user')
+
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
