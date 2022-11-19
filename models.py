@@ -5,7 +5,7 @@ from peewee import *
 import datetime 
 from flask_login import UserMixin
 
-if os.environ.get("FLASK_ENV")!="production": # later we will manually add this env var
+if os.environ.get("FLASK_ENV")!="development": # later we will manually add this env var
                               # in heroku so we can write this code
   DATABASE = connect(os.environ.get('DATABASE_URL')) # heroku will add this
                                                      # env var for you
