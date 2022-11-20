@@ -17,6 +17,7 @@ PORT=os.environ.get("PORT")
 app = Flask(__name__) 
 app.secret_key = os.environ.get("APP_SECRET")
 
+# Deja added
 if os.environ.get('FLASK_ENV') != 'development':
     app.config.update(
         SESSION_COOKIE_SECURE=True,
@@ -26,6 +27,7 @@ if os.environ.get('FLASK_ENV') != 'development':
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 @login_manager.user_loader
 def load_user(userid):
