@@ -33,8 +33,8 @@ def load_user(userid):
     except:
         return None
 
-CORS(members, origins=['https://ffonnect.herokuapp.com/','http://localhost:3000'], supports_credentials=True)
-CORS(user, origins=['https://ffonnect.herokuapp.com/','http://localhost:3000'], supports_credentials=True)
+CORS(members, origins=['https://ffonnect.herokuapp.com','http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['https://ffonnect.herokuapp.com','http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(members, url_prefix='/api/v1/members')
 app.register_blueprint(user, url_prefix='/api/v1/user')
