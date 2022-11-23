@@ -18,12 +18,12 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("APP_SECRET")
 
 # Deja added
-if os.environ.get('FLASK_ENV') != 'development':
-    app.config.update(
-        SESSION_COOKIE_SECURE=True,
-        SESSION_COOKIE_HTTPONLY=True,
-        SESSION_COOKIE_SAMESITE='None',
-)
+# if os.environ.get('FLASK_ENV') != 'development':
+#     app.config.update(
+#         SESSION_COOKIE_SECURE=True,
+#         SESSION_COOKIE_HTTPONLY=True,
+#         SESSION_COOKIE_SAMESITE='None',
+# )
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -35,7 +35,7 @@ def load_user(userid):
         return models.User.get(models.User.id == userid)
     except:
         return None
-
+# 
 CORS(members, origins=['https://ffonnect.herokuapp.com','http://localhost:3000'], supports_credentials=True)
 CORS(user, origins=['https://ffonnect.herokuapp.com','http://localhost:3000'], supports_credentials=True)
 
