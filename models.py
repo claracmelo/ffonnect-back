@@ -5,25 +5,15 @@ from peewee import *
 import datetime 
 from flask_login import UserMixin
 
-# if os.environ.get("FLASK_ENV")!="development": 
-#     # later we will manually add this env var
-#                               # in heroku so we can write this code
-#   DATABASE = connect(os.environ.get('DATABASE_URL')) # heroku will add this
-#                                                      # env var for you
-#                                                      # when you provision the
-#                                                      # Heroku Postgres Add-on
-# else:
-#   DATABASE = SqliteDatabase('members.sqlite')
-
-
-
 DATABASE = connect(os.environ.get('DATABASE_URL') or 'sqlite:///members.sqlite')
 
 class User(UserMixin, Model):
     username = CharField()
+    last_name = CharField(null=True)
     dob = DateField()
     email = CharField(unique=True)
     password = CharField()
+    
     # photo = ??
 
     class Meta:
@@ -31,6 +21,7 @@ class User(UserMixin, Model):
 
 class Member(Model):
     name = CharField() #string
+    last_name = CharField(null=True) #string
     relation = CharField() #mom, dad, sis, etc
     dob = DateField() #date of birth
     status = BooleanField() #alive? if not, dod field -- default FALSE

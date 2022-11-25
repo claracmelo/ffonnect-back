@@ -35,7 +35,7 @@ def create_members():
     payload = request.get_json() # this is like req.body in express
     print(current_user,"current user")
     print(payload)
-    new_member = models.Member.create(name=payload['name'],relation=payload["relation"],dob=payload["dob"],status=payload["status"],dod=payload["dod"], relation_id=current_user.id,direct_relation =payload)
+    new_member = models.Member.create(name=payload['name'],last_name=payload['last_name'],relation=payload["relation"],dob=payload["dob"],status=payload["status"],dod=payload["dod"], relation_id=current_user.id,direct_relation =payload["direct_relation"])
     print(new_member) # just print the ID -- check sqlite3 to see
 
     # name = CharField() #string
